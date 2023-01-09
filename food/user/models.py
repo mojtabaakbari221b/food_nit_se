@@ -2,9 +2,11 @@ from django.db import models
 from django.utils.translation import gettext as _
 from django.contrib.auth.models import AbstractUser
 from . import model_fields
+from .managers import UserManager
 
 class User(AbstractUser):
-    username = None
+    objects = UserManager()
+    
     first_name = None
     last_name = None
 
@@ -23,3 +25,6 @@ class User(AbstractUser):
         blank=False,
     )
 
+User._meta.get_field('username').editable = False
+User._meta.get_field('username').blank = True
+User._meta.get_field('username').null = True
