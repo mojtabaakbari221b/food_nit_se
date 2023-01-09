@@ -125,3 +125,4 @@ GitHub.sublime-settings
 # docs builded html
 docs/build/*
 make_html.sh
+static
