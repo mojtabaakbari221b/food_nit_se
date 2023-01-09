@@ -1,5 +1,5 @@
 """
-WSGI config for food project.
+WSGI config for resturant project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

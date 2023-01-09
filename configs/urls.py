@@ -1,4 +1,4 @@
-"""food URL Configuration
+"""resturant URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -20,7 +20,7 @@ from django.urls import path, include, re_path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('api/user/', include('food.user.urls')),
+    path('api/user/', include('resturant.user.urls')),
 ]
 
 # drf yasg doc
@@ -30,11 +30,11 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
    openapi.Info(
-      title="food API",
+      title="resturant API",
       default_version='v1',
       description="",
       terms_of_service="https://www.google.com/policies/terms/",
-      contact=openapi.Contact(email="contact@food.com"),
+      contact=openapi.Contact(email="contact@resturant.com"),
    ),
    public=True,
 )
