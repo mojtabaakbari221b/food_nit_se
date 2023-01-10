@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from pathlib import Path
+from .utilities import load_env
+
+env = load_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,10 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-u8wo0@&kdnev_60rbt^wz$nekjtp_d*^l(n^x(amk6qcb9_ezl'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG') == 'True'
 
 ALLOWED_HOSTS = []
 
@@ -90,12 +93,24 @@ WSGI_APPLICATION = 'configs.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if env('USE_SQLITE') == 'True':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+else :
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': env('POSTGRES_DB'),
+            'USER': env('POSTGRES_USER'),
+            'PASSWORD': env('POSTGRES_PASSWORD'),
+            'HOST': env('POSTGRES_HOST'),
+            'PORT': env('POSTGRES_PORT'),
+        }
+    }
 
 
 # Password validation
@@ -158,7 +173,7 @@ REST_FRAMEWORK = {
 
 HASHID_FIELD_SALT = 'id'
 
-ZARINPAL_CALLBACK_URL = 'http://localhost:8000/cart/pay/callback'
+ZARINPAL_CALLBACK_URL = env('ZARINPAL_CALLBACK_URL')
 
 ZARINPAL_SIMULATION = True
 
