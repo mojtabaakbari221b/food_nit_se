@@ -30,3 +30,15 @@ class Food(models.Model):
     views = models.PositiveIntegerField(default=0)
 
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+    location = models.CharField(
+        max_length=256,
+        blank=True,
+        null=True,
+    )
+
+    time_to_deliver = models.CharField(
+        max_length=256,
+        blank=True,
+        null=True,
+    )
