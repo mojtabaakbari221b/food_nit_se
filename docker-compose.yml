@@ -23,11 +23,11 @@ services:
       - resturant_media_volume:/opt/resturant/resturant/media
     restart: always
     ports:
-      - "8010:8010"
+      - "8013:8013"
     networks:
       - resturant_network
     expose:
-      - 8010
+      - 8013
 
 
 volumes:
