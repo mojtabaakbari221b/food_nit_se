@@ -10,3 +10,13 @@ class UserSerialzier(serializers.ModelSerializer):
             'email',
             'password',
         ]
+
+
+class UserCreateSerialzier(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = [
+            'name',
+            'email',
+            'password',
+        ]
