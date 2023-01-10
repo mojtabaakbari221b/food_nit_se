@@ -1,11 +1,14 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator 
-
+from django.utils.html import mark_safe
 
 class Category(models.Model):
     name = models.CharField(
         max_length=128,
     )
+
+    def __str__(self) -> str:
+        return self.name
 
 
 class Food(models.Model):
@@ -42,3 +45,9 @@ class Food(models.Model):
         blank=True,
         null=True,
     )
+
+    def image_tag(self):
+        return mark_safe(f'<img src="{self.picture.url}" width="150" height="150" />')
+    
+    image_tag.short_description = 'Image'
+    image_tag.allow_tags = True

@@ -2,4 +2,10 @@ from django.contrib import admin
 from .models import *
 
 
-admin.site.register(Cart)
+class CartAdmin(admin.ModelAdmin):
+    list_display = [
+        'user',
+        'is_paid',
+    ]
+
+admin.site.register(Cart, CartAdmin)
