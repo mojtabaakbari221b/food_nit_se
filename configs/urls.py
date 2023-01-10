@@ -23,9 +23,8 @@ urlpatterns = [
     path('api/admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('api/user/', include('resturant.user.urls')),
-    path('api/cart/', include('resturant.cart.urls')),
+    path('', include('resturant.cart.urls'), name='cart'),
     path('api/food/', include('resturant.food.urls')),
-    path('api/zarinpal/', include('django_zarinpal.urls')),
 ]
 
 # drf yasg doc
