@@ -19,3 +19,10 @@ class Cart(models.Model):
     is_paid = models.BooleanField(
         default=False,
     )
+
+    def get_price_of_items(self):
+        price = 0
+        for food in self.foods.all():
+            price = price + food.price
+
+        return price
