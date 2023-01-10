@@ -1,0 +1,48 @@
+version: "3"
+
+
+services:
+  inolinx_postgresql:
+    image:
+      postgres:14
+    container_name: resturant_postgresql
+    volumes:
+      - resturant_postgresql_volume:/var/lib/postgresql/data
+    restart: always
+    env_file: configs/.env.d/.env
+    networks:
+      - resturant_network
+  
+  resturant:
+    build: 
+      context: .
+      dockerfile: docker.conf.d/resturant/Dockerfile
+    container_name: resturant
+    volumes:
+      - resturant_static_volume:/opt/resturant/resturant/static
+      - resturant_media_volume:/opt/resturant/resturant/media
+    restart: always
+    ports:
+      - "8010:8010"
+    networks:
+      - resturant_network
+    expose:
+      - 8010
+
+
+volumes:
+  resturant_static_volume:
+    external:
+      true
+  resturant_media_volume:
+    external:
+      true
+  resturant_postgresql_volume:
+    external:
+        true
+
+
+networks:
+  resturant_network:     
+    external: 
+      true
