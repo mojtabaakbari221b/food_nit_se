@@ -20,6 +20,12 @@ class Cart(models.Model):
         default=False,
     )
 
+    def add_food_to_cart(self, food):
+        self.foods.add(food)
+    
+    def remove_food_from_cart(self, food):
+        self.foods.delete(food)
+
     def get_price_of_items(self):
         price = 0
         for food in self.foods.all():
