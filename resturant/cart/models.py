@@ -1,6 +1,6 @@
 from django.db import models
-from resturant.food.models import Food
 from django.conf import settings
+from resturant.food.models import Food
 from .managers import FoodManager
 
 
@@ -26,3 +26,11 @@ class Cart(models.Model):
             price = price + food.price
 
         return price
+    
+    def verify(self):
+        self.is_paid = True
+        self.save(
+            update_fields=[
+                'is_paid',
+            ],
+        )
