@@ -69,7 +69,9 @@ ROOT_URLCONF = 'configs.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'resturant' ,'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -156,8 +158,10 @@ REST_FRAMEWORK = {
 
 HASHID_FIELD_SALT = 'id'
 
-ZARINPAL_CALLBACK_URL = 'http://localhost:8000/api/cart/callback/'
+ZARINPAL_CALLBACK_URL = 'http://localhost:8000/cart/pay/callback'
 
 ZARINPAL_SIMULATION = True
 
 ZARINPAL_MERCHANT_ID = ''
+
+ZARINPAL_VERIFY_TRANSACTION_VIEW = 'cart:verify_transaction'
