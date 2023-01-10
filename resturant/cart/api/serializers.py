@@ -8,7 +8,7 @@ class CartSerializer(serializers.ModelSerializer):
     price = serializers.SerializerMethodField()
 
     def get_price(self, obj):
-        pass
+        return obj.get_price_of_items()
 
 
     class Meta:
