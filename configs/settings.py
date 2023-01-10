@@ -39,8 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'rest_framework',
+    'rest_framework.authtoken',
     'drf_yasg',
     'debug_toolbar',
+    'django_zarinpal',
 
     'resturant.user',
     'resturant.food',
@@ -149,3 +151,13 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
 }
+
+# django_zarinpal settings
+
+HASHID_FIELD_SALT = 'id'
+
+ZARINPAL_CALLBACK_URL = 'http://localhost:8000/api/cart/callback/'
+
+ZARINPAL_SIMULATION = True
+
+ZARINPAL_MERCHANT_ID = ''

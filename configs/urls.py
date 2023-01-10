@@ -19,12 +19,13 @@ import debug_toolbar
 
 
 urlpatterns = [
-    path('__debug__/', include(debug_toolbar.urls)),
-    path('admin/', admin.site.urls),
+    path('api/__debug__/', include(debug_toolbar.urls)),
+    path('api/admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('api/user/', include('resturant.user.urls')),
     path('api/cart/', include('resturant.cart.urls')),
     path('api/food/', include('resturant.food.urls')),
+    path('api/zarinpal/', include('django_zarinpal.urls')),
 ]
 
 # drf yasg doc
