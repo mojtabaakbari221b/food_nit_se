@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     'resturant.user',
     'resturant.food',
+    'resturant.cart',
 ]
 
 MIDDLEWARE = [

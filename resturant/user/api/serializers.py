@@ -1,6 +1,5 @@
 from rest_framework import serializers
-from resturant.food.api.serializers import FoodSerializer
-from ..models import User, Food
+from ..models import User
 
 
 class UserSerialzier(serializers.ModelSerializer):
@@ -10,20 +9,4 @@ class UserSerialzier(serializers.ModelSerializer):
             'name',
             'email',
             'password',
-        ]
-
-
-class CartSerializer(serializers.ModelSerializer):
-    foods = FoodSerializer(many=True)
-    price = serializers.SerializerMethodField()
-
-    def get_price(self, obj):
-        pass
-
-
-    class Meta:
-        model = Food
-        fields = [
-            'foods',
-            'price',
         ]
