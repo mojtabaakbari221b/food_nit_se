@@ -25,6 +25,7 @@ urlpatterns = [
     path('api/user/', include('resturant.user.urls')),
     path('', include('resturant.cart.urls'), name='cart'),
     path('api/food/', include('resturant.food.urls')),
+    path('baton/', include('baton.urls')),
 ]
 
 # drf yasg doc
