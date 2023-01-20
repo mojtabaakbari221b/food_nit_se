@@ -27,7 +27,7 @@ class AuthTokenSerializer(serializers.Serializer):
 
         if email and password:
             user = get_object_or_404(
-                get_user_model().filter(
+                get_user_model().objects.filter(
                     email=email,
                     password=password,
                 )
