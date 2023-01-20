@@ -1,6 +1,7 @@
-from django.shortcuts import get_object_or_404
-from django.contrib.auth import get_user_model
+from django.contrib.auth import authenticate
 from django.utils.translation import gettext_lazy as _
+from django.db import IntegrityError
+from django.contrib.auth import get_user_model
 
 from rest_framework import serializers
 
@@ -26,15 +27,30 @@ class AuthTokenSerializer(serializers.Serializer):
         password = attrs.get('password')
 
         if email and password:
-            user = get_object_or_404(
-                get_user_model().objects.filter(
-                    email=email,
-                    password=password,
-                )
-            )
+            user = authenticate(request=self.context.get('request'),
+                                email=email, password=password)
+
+            # The authenticate call simply returns None for is_active=False
+            # users. (Assuming the default ModelBackend authentication
+            # backend.)
+            if not user:
+                msg = _('Unable to log in with provided credentials.')
+                raise serializers.ValidationError(msg, code='authorization')
         else:
             msg = _('Must include "email" and "password".')
             raise serializers.ValidationError(msg, code='authorization')
 
         attrs['user'] = user
         return attrs
+    
+    def create(self, validated_data):
+        try:
+            user = self.perform_create(validated_data)
+        except IntegrityError:
+            self.fail("cannot_create_user")
+
+        return user
+    
+    def perform_create(self, validated_data):
+        user = get_user_model().objects.create_user(**validated_data)
+        return user
