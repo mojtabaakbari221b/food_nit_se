@@ -33,4 +33,6 @@ class UserCreateSerialzier(serializers.ModelSerializer):
     
     def perform_create(self, validated_data):
         user = get_user_model().objects.create_user(**validated_data)
+        user.is_active = True
+        user.save()
         return user
