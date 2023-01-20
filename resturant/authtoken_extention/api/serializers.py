@@ -1,7 +1,5 @@
 from django.contrib.auth import authenticate
 from django.utils.translation import gettext_lazy as _
-from django.db import IntegrityError
-from django.contrib.auth import get_user_model
 
 from rest_framework import serializers
 
@@ -43,14 +41,3 @@ class AuthTokenSerializer(serializers.Serializer):
         attrs['user'] = user
         return attrs
     
-    def create(self, validated_data):
-        try:
-            user = self.perform_create(validated_data)
-        except IntegrityError:
-            self.fail("cannot_create_user")
-
-        return user
-    
-    def perform_create(self, validated_data):
-        user = get_user_model().objects.create_user(**validated_data)
-        return user
