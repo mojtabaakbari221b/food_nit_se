@@ -27,7 +27,7 @@ urlpatterns = [
     path('', include('resturant.cart.urls'), name='cart'),
     path('api/food/', include('resturant.food.urls')),
     path('baton/', include('baton.urls')),
-    path('api/token/', include('resturant.authtoken_extention.urls')),
+    path('api/token/', CustomObtainAuthToken.as_view())
 ]
 
 # media and static
