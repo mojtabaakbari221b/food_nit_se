@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
+from resturant.authtoken_extention.api.viewsets import CustomObtainAuthToken
 import debug_toolbar
 
 
@@ -26,7 +27,9 @@ urlpatterns = [
     path('', include('resturant.cart.urls'), name='cart'),
     path('api/food/', include('resturant.food.urls')),
     path('baton/', include('baton.urls')),
+    path('api/token/', CustomObtainAuthToken.as_view())
 ]
+
 
 # drf yasg doc
 
