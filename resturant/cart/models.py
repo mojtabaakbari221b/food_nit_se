@@ -28,8 +28,6 @@ class Cart(models.Model):
         
         return price
 
-            
-    
     def verify(self):
         self.is_paid = True
         self.save(

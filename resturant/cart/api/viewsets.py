@@ -15,7 +15,7 @@ class CartViewset(viewsets.ViewSet):
     ]
     
     
-    @action(detail=False , methods=["get"])
+    @action(detail=False , methods=["post"])
     def pay(self, request):
         serializer = CartFoodSerializer(
             request.data,
