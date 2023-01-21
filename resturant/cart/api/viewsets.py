@@ -38,4 +38,6 @@ class CartViewset(viewsets.ViewSet):
             }
         )
 
+        return Response(data={'url' : result})
+
         return redirect(result)
