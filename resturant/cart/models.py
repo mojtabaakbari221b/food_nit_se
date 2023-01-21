@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.shortcuts import get_object_or_404
 from resturant.food.models import Food
 from .managers import FoodManager
 
@@ -12,26 +13,22 @@ class Cart(models.Model):
         on_delete=models.CASCADE,
     )
 
-    foods = models.ManyToManyField(
-        Food,
-    )
-
     is_paid = models.BooleanField(
         default=False,
     )
 
-    def add_food_to_cart(self, food):
-        self.foods.add(food)
-    
-    def remove_food_from_cart(self, food):
-        self.foods.delete(food)
-
-    def get_price_of_items(self):
+    def get_price_of_items(self, data):
         price = 0
-        for food in self.foods.all():
-            price = price + food.price
 
+        for food_id, count in data.items() :
+            food = get_object_or_404(
+                Food.objects.filter(id=food_id)
+            )
+            price += food.price * count
+        
         return price
+
+            
     
     def verify(self):
         self.is_paid = True
